@@ -21,3 +21,6 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+    generate-ddl: true
+   #hibernate:  ddl-auto  속성을 적용할지 말지 결정하는 옵션 기본이 false라서 true로 바꿔야함
+     
