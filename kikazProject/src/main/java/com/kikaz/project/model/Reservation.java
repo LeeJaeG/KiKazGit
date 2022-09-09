@@ -1,11 +1,13 @@
 package com.kikaz.project.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,10 +26,10 @@ public class Reservation {
 	private Date rStart;
 	private Date rEnd;
 	private Date rsrv_date;
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY, targetEntity = Section.class) //  클래스 명시
+	@JsonIgnore 
+	private List<Section> section;
+	@ManyToOne(fetch=FetchType.LAZY ,targetEntity = User.class)
 	@JsonIgnore
-	private Section section;
-	@OneToOne(fetch=FetchType.LAZY)
-	@JsonIgnore
-	private User user;
+	private List<User> user;
 }

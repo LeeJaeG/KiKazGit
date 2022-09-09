@@ -12,6 +12,7 @@ import lombok.Data;
 public class Company {
 	@Id
 	private Long company_id;
+	private String business_name;
 	private String location;
 	private String com_imgpath;
 	private String theme;
