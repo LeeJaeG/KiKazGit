@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>업체등록</title>
+</head>
+<body>
+<div>
+
+<form action="/c_insert" method="post" enctype="multipart/form-data">
+	<fieldset>
+       <legend>업체등록</legend>
+        회사명 : <input type="text" name="company_name" id="company_name"><br>
+        사업자명 : <input type="text" name="business_name" id="business_name"><br>
+        위치 : <input type="text" name="location" id="location"><br>
+        회사 전화번호 :<input type="text" name="com_tel" id="com_tel"><br>
+        <input type="file" name="file" id="com_img">
+        <button type="submit">등록</button>
+    </fieldset>
+</form>
+</div>
+
+</body>
+</html>

@@ -19,6 +19,7 @@ import lombok.Data;
 public class User {
 	@Id
 	private String username;
+	private String u_name;
 	private String password;
 	private Date birthDate;
 	private String email;
