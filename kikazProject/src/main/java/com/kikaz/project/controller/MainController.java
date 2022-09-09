@@ -23,13 +23,18 @@ public class MainController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	@GetMapping("/main")
+	public String main() {
+		return "main";
+	}
+	
 	@GetMapping("/loginForm")
-	public String home() {
+	public String login() {
 		return "loginForm";
 	}
 	
 	@GetMapping("/joinForm")
-	public String main() {
+	public String join() {
 		return "joinForm";
 	}
 	
