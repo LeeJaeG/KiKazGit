@@ -3,15 +3,29 @@ package com.kikaz.project.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+<<<<<<< HEAD
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+=======
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
+>>>>>>> origin/song
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +36,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kikaz.project.model.Company;
 import com.kikaz.project.model.Reservation;
 import com.kikaz.project.model.Role;
+import com.kikaz.project.model.Section;
 import com.kikaz.project.model.User;
 import com.kikaz.project.repository.CompanyRepository;
+
 import com.kikaz.project.repository.ReservationRepository;
+
+import com.kikaz.project.repository.SectionRepository;
+
 import com.kikaz.project.repository.UserRepository;
 
 
@@ -41,12 +60,18 @@ public class MainController {
 	private ReservationRepository reservationrepositiry;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+	@Autowired
+	private SectionRepository sectionRepository;
+	
 	@GetMapping("/main")
 	public String main() {
 		return "main";
 	}
 
+
+	
+	
+	
 	@GetMapping("/loginForm")
 	public String login() {
 		return "loginForm";
@@ -68,6 +93,7 @@ public class MainController {
 		return "redirect:/loginForm";
 	}
 
+
 	@GetMapping("/reservation")
 	public String resevation() {
 		return "reservation";
@@ -86,6 +112,9 @@ public class MainController {
 	}
 	
 	
+
+	// 키즈카페 등록
+
 	@GetMapping("/cafeinsert")
 	public String cafejoin() {
 		return "cafeinsert";
@@ -104,6 +133,31 @@ public class MainController {
 
 		}
 		return "cafesuccess";
+	}
+
+	// 파트 등록
+	@GetMapping("/sectioninsert")
+	public String sectionjoin() {
+		return "sectioninsert";
+	}
+	
+	@PostMapping("/s_insert")
+	@ResponseBody
+	public String s_insert(MultipartFile file, Section sect) {
+		System.out.println(sect);
+		String imageFileName = file.getOriginalFilename();
+		String path = "D:/sectionfile/" + imageFileName;
+		sect.setSect_imgpath(path);
+		sectionRepository.save(sect);
+		Path sectPath = Paths.get(path + imageFileName);
+		try {
+			Files.write(sectPath, file.getBytes());
+		} catch (Exception e) {
+
+		}
+
+		return "cafesuccess";
+
 	}
 
 }
