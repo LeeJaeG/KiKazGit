@@ -3,8 +3,11 @@ package com.kikaz.project.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +15,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kikaz.project.model.Company;
+import com.kikaz.project.model.Reservation;
 import com.kikaz.project.model.Role;
 import com.kikaz.project.model.User;
 import com.kikaz.project.repository.CompanyRepository;
+import com.kikaz.project.repository.ReservationRepository;
 import com.kikaz.project.repository.UserRepository;
+
+
+
 
 @Controller
 public class MainController {
@@ -28,17 +36,16 @@ public class MainController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
+	private CompanyRepository companyrepositiry;
+	@Autowired
+	private ReservationRepository reservationrepositiry;
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	
 	@GetMapping("/main")
 	public String main() {
 		return "main";
 	}
-	
-
-	@Autowired
-	private CompanyRepository companyrepositiry;
 
 	@GetMapping("/loginForm")
 	public String login() {
@@ -59,9 +66,26 @@ public class MainController {
 		user.setPassword(encPassword);
 		userRepository.save(user);
 		return "redirect:/loginForm";
-
 	}
 
+	@GetMapping("/reservation")
+	public String resevation() {
+		return "reservation";
+	}
+
+
+	
+	@PostMapping("/r_insert")
+	@ResponseBody
+	public ResponseEntity<Reservation> postEating(@RequestBody Reservation sleepData) {
+		System.out.println("post request");
+		System.out.println(sleepData.toString());
+		reservationrepositiry.save(sleepData);
+		return new ResponseEntity<Reservation>(sleepData, HttpStatus.CREATED);
+
+	}
+	
+	
 	@GetMapping("/cafeinsert")
 	public String cafejoin() {
 		return "cafeinsert";
@@ -70,10 +94,10 @@ public class MainController {
 	@PostMapping("/c_insert")
 	public @ResponseBody String c_insert(MultipartFile file, Company com) {
 		String imageFileName = file.getOriginalFilename();
-		String path = "D:/projectfile/" + imageFileName;
+		String path = "D:/projectFile/" + imageFileName;
 		com.setCom_imgpath(path);
 		companyrepositiry.save(com);
-		Path imaPath = Paths.get(path + imageFileName);
+		Path imaPath = Paths.get(path);
 		try {
 			Files.write(imaPath, file.getBytes());
 		} catch (Exception e) {
