@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+
+<form action="/s_insert" method="post" enctype="multipart/form-data">
+	<fieldset>
+       <legend>파트등록</legend>
+        파트명 : <input type="text" name="section_name" id="section_name"><br>
+        가격 : <input type="text" name="price" id="price"><br>
+        총 시간 : <input type="datetime-local" name="standard_time" id="standard_time" ><br>
+        시작시간 :<input type="datetime-local" name="start_time" id="start_time"><br>
+        종료시간 :<input type="datetime-local" name="end_time" id="end_time"><br>
+        최대인원(성인) :<select name="maxnum_adult" id="maxnum_adult">
+        <option value="0">0명</option>
+        <option value="1">1명</option>
+        </select><br>
+        최대인원(어린이) :<select name="maxnum_child" id="maxnum_child">
+        <option value="0">0명</option>
+        <option value="1">1명</option>
+        </select><br>
+        <input type="file" name="file" id="sect_imgpath">
+        <button type="submit">등록</button>
+    </fieldset>
+</form>
+</div>
+
+</body>
+</html>
