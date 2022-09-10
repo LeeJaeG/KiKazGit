@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,12 +46,7 @@ public class MainController {
 	private SectionRepository sectionRepository;
 
 	
-	@InitBinder
-    protected void init(HttpServletRequest request, ServletRequestDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-    }
+	
 	
 	@GetMapping("/loginForm")
 	public String home() {
@@ -103,7 +98,9 @@ public class MainController {
 	}
 	
 	@PostMapping("/s_insert")
-	public @ResponseBody String s_insert(MultipartFile file, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)Section sect ) {
+	@ResponseBody
+	public String s_insert(MultipartFile file, Section sect) {
+		System.out.println(sect);
 		String imageFileName = file.getOriginalFilename();
 		String path = "D:/sectionfile/" + imageFileName;
 		sect.setSect_imgpath(path);
