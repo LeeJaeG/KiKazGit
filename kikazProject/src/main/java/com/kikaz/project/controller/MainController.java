@@ -37,7 +37,7 @@ import com.kikaz.project.model.Company;
 import com.kikaz.project.model.Reservation;
 import com.kikaz.project.model.Role;
 import com.kikaz.project.model.Section;
-
+import com.kikaz.project.model.Section1;
 import com.kikaz.project.model.User;
 import com.kikaz.project.repository.CompanyRepository;
 
