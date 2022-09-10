@@ -3,13 +3,11 @@ package com.kikaz.project.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-<<<<<<< HEAD
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-=======
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,15 +18,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
->>>>>>> origin/song
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +37,7 @@ import com.kikaz.project.model.Company;
 import com.kikaz.project.model.Reservation;
 import com.kikaz.project.model.Role;
 import com.kikaz.project.model.Section;
+import com.kikaz.project.model.Section1;
 import com.kikaz.project.model.User;
 import com.kikaz.project.repository.CompanyRepository;
 
@@ -141,23 +142,42 @@ public class MainController {
 		return "sectioninsert";
 	}
 	
+//	@PostMapping("/s_insert")
+//	@ResponseBody
+//	public String s_insert(MultipartFile file, Section sect) {
+//		System.out.println(sect);
+//		String imageFileName = file.getOriginalFilename();
+//		String path = "D:/sectionfile/" + imageFileName;
+//		sect.setSect_imgpath(path);
+//		sectionRepository.save(sect);
+//		Path sectPath = Paths.get(path + imageFileName);
+//		try {
+//			Files.write(sectPath, file.getBytes());
+//		} catch (Exception e) {
+//		}
+//		return "cafesuccess";
+//	}
+
+
+	
 	@PostMapping("/s_insert")
 	@ResponseBody
-	public String s_insert(MultipartFile file, Section sect) {
-		System.out.println(sect);
+	public ResponseEntity<Section> postEating(@RequestBody Section sect, MultipartFile file) {
+		System.out.println("post request");
+		System.out.println(sect.toString());
 		String imageFileName = file.getOriginalFilename();
 		String path = "D:/sectionfile/" + imageFileName;
-		sect.setSect_imgpath(path);
+System.out.println(path);
+				sect.setSect_imgpath(path);
 		sectionRepository.save(sect);
 		Path sectPath = Paths.get(path + imageFileName);
 		try {
 			Files.write(sectPath, file.getBytes());
 		} catch (Exception e) {
-
 		}
-
-		return "cafesuccess";
+		
+		return new ResponseEntity<Section>(sect, HttpStatus.CREATED);
 
 	}
-
+	
 }
