@@ -11,8 +11,8 @@
 <form action="/c_insert" method="post" enctype="multipart/form-data">
 	<fieldset>
        <legend>업체등록</legend>
-        회사명 : <input type="text" name="company_name" id="company_name"><br>
-        사업자명 : <input type="text" name="business_name" id="business_name"><br>
+        회사명 : <input type="text" name="companyname" id="companyname"><br>
+        사업자명 : <input type="text" name="businessname" id="businessname"><br>
         위치 : <input type="text" name="location" id="location"><br>
         회사 전화번호 :<input type="text" name="com_tel" id="com_tel"><br>
         회사 소개: <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
@@ -23,4 +23,18 @@
 </div>
 
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("location").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("location").value = data.address; // 주소 넣기
+            }
+        }).open();
+    });
+}
+</script>
+
 </html>

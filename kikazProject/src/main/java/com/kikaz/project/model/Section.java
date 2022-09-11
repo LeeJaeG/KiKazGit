@@ -29,8 +29,8 @@ public class Section {
 
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
-   private Long section_id;
-   private String section_name;
+   private Long sectionid;
+   private String sectionname;
    private int price;
    //@DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
    private LocalDateTime standardtime;

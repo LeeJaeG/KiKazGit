@@ -16,8 +16,8 @@ public class Company {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	private Long companyid;
-	private String company_name;
-	private String business_name;
+	private String companyname;
+	private String businessname;
 	private String location;
 	private String com_imgpath;
 	private String theme;
