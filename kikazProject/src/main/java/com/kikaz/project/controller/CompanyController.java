@@ -6,6 +6,9 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kikaz.project.model.Company;
 import com.kikaz.project.repository.CompanyRepository;
+import com.kikaz.project.service.CompanyService;
 
 @Controller
 public class CompanyController {
-	
+	@Autowired
+	private CompanyService companyService;
 	@Autowired
 	private CompanyRepository companyrepositiry;
 	
@@ -54,4 +59,14 @@ public class CompanyController {
 		mod.addAttribute("com", com);
 		return "cafeimage";
 	}
+	
+	@GetMapping("/list")
+	public String getList(Model model,
+			@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		companyService.findBoardList(pageable);
+		model.addAttribute("companyList", companyService.findBoardList(pageable));
+
+		return "company/list";
+	}
+	
 }
