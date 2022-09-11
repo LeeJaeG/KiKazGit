@@ -24,11 +24,11 @@ public class ReservationController {
 
 	@PostMapping("/r_insert")
 	@ResponseBody
-	public ResponseEntity<Reservation> postEating(@RequestBody Reservation sleepData) {
+	public ResponseEntity<Reservation> postEating(@RequestBody Reservation reservation) {
 		System.out.println("post request");
-		System.out.println(sleepData.toString());
-		reservationrepositiry.save(sleepData);
-		return new ResponseEntity<Reservation>(sleepData, HttpStatus.CREATED);
+		System.out.println(reservation.toString());
+		reservationrepositiry.save(reservation);
+		return new ResponseEntity<Reservation>(reservation, HttpStatus.CREATED);
 
 	}
 }
