@@ -30,6 +30,7 @@ implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	
 //json array 사용
 implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
