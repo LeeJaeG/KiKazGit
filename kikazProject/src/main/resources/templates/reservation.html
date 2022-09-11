@@ -51,9 +51,9 @@
         
         
         <button id="insert">등록</button>
-        <div>
-			<a href="/r_list">예약확인</a>
-		</div>
+        <button id="r_listall">예약자조회</button>
+        
+        
 
 
 </div>
@@ -84,6 +84,11 @@
 					alert('저장 실패!');
 				}
 			});
+
+		});
+		
+		$('#r_listall').click(function() {
+			location.href = "/r_listall/";
 
 		});
 	</script>
