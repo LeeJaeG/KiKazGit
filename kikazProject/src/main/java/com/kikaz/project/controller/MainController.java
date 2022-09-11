@@ -4,21 +4,40 @@ package com.kikaz.project.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+=======
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+>>>>>>> origin/song
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
+<<<<<<< HEAD
 
+=======
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> origin/song
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kikaz.project.model.Company;
@@ -41,6 +60,9 @@ public class MainController {
 	@Autowired
 	private SectionRepository sectionRepository;
 
+	
+	
+	
 	@GetMapping("/loginForm")
 	public String home() {
 		return "loginForm";
@@ -65,6 +87,7 @@ public class MainController {
 
 	}
 
+	// 키즈카페 등록
 	@GetMapping("/cafeinsert")
 	public String cafejoin() {
 		return "cafeinsert";
@@ -103,6 +126,7 @@ public class MainController {
 	         Files.write(sectPath, file.getBytes());
 	      } catch (Exception e) {
 
+<<<<<<< HEAD
 	      }
 
 	      return "cafesuccess";
@@ -129,4 +153,31 @@ public class MainController {
 	   }
 	  
 	   
+=======
+	// 파트 등록
+	@GetMapping("/sectioninsert")
+	public String sectionjoin() {
+		return "sectioninsert";
+	}
+	
+	@PostMapping("/s_insert")
+	@ResponseBody
+	public String s_insert(MultipartFile file, Section sect) {
+		System.out.println(sect);
+		String imageFileName = file.getOriginalFilename();
+		String path = "D:/sectionfile/" + imageFileName;
+		sect.setSect_imgpath(path);
+		sectionRepository.save(sect);
+		Path sectPath = Paths.get(path + imageFileName);
+		try {
+			Files.write(sectPath, file.getBytes());
+		} catch (Exception e) {
+
+		}
+
+		return "cafesuccess";
+
+	}
+
+>>>>>>> origin/song
 }

@@ -1,7 +1,11 @@
 package com.kikaz.project.model;
 
 
+<<<<<<< HEAD
 import java.util.Date;
+=======
+import java.time.LocalDateTime;
+>>>>>>> origin/song
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +19,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -24,6 +30,7 @@ import lombok.Data;
 @Table
 public class Section {
 
+<<<<<<< HEAD
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
    private Long section_id;
@@ -47,3 +54,23 @@ public class Section {
    @JsonIgnore
    private Company company;
 }
+=======
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long section_id;
+	private String section_name;
+	private int price;
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime standardtime;
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime starttime;
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime endtime;
+	private int maxnum_adult;
+	private int maxnum_child;
+	private String sect_imgpath;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JsonIgnore
+	private Company company;
+}
+>>>>>>> origin/song
