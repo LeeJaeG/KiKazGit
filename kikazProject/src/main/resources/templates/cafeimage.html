@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>cafe-image</title>
+</head>
+<body>
+<div >
+	<div>
+		사진
+		[[${com?.com_imgpath}]]
+		<br>
+		<img th:src="@{../image/}+${com.com_imgpath}">
+		<!-- <img alt="" src="../image/anggo.jpg"> -->
+	</div>
+	
+	<div>
+		내용
+	</div>
+</div>
+</body>
+</html>

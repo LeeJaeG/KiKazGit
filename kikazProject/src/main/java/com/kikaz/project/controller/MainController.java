@@ -3,6 +3,7 @@ package com.kikaz.project.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.servlet.http.HttpServletRequest;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +38,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kikaz.project.model.Company;
@@ -84,6 +95,7 @@ public class MainController {
 		user.setRole(Role.USER);
 		String encPassword = bCryptPasswordEncoder.encode(user.getPassword());
 		user.setPassword(encPassword);
+
 		userRepository.save(user);
 		return "redirect:/loginForm";
 	}
@@ -125,6 +137,41 @@ public class MainController {
 //		return "cafesuccess";
 //	}
 //
+
+	@PostMapping("/c_insert")
+	public @ResponseBody String c_insert(MultipartFile file, Company com) {
+		String imageFileName = file.getOriginalFilename();
+		String path = "C:\\Users\\17\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\image\\";
+		com.setCom_imgpath(imageFileName);
+		companyrepositiry.save(com);
+		Path imaPath = Paths.get(path + imageFileName);
+		try {
+			Files.write(imaPath, file.getBytes());
+		} catch (Exception e) {
+
+		}
+		return "cafesuccess";
+	}
+
+	/*
+	 * @RequestMapping("/cafeimg") public String cafe_img(Model
+	 * mod,@RequestParam(value = "id", defaultValue = "0")Long id) {
+	 * Optional<Company> com = companyrepositiry.findById(id);
+	 * mod.addAttribute("com", com); System.out.println("====>"+com); return
+	 * "cafeimage"; }
+	 */
+	@RequestMapping("/cafeimg")
+	public String cafeimg(Model mod) {
+		Long id = (long) 2;
+		Optional<Company> result = companyrepositiry.findById(id);
+		System.out.println("=============================");
+		Company com = result.get();
+		System.out.println(com);
+
+		mod.addAttribute("com", com);
+		return "cafeimage";
+	}
+
 	// 파트 등록
 	@GetMapping("/sectioninsert")
 	public String sectionjoin() {
@@ -141,15 +188,29 @@ public class MainController {
 //		return "cafesuccess";
 //	}
 
-	@PostMapping("/s_insert")
+//	@PostMapping("/s_insert")
+//
+//	public String s_insert(@RequestParam("file") MultipartFile file, Section sect,
+//			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime standard_time,
+//			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start_time,
+//			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end_time
+//	) {
+//		String imageFileName = file.getOriginalFilename();
+//		String path = "D:/sectionfile/";
+//		sect.setSect_imgpath(path);
+//
+//		Path sectPath = Paths.get(path + imageFileName);
+//		try {
+//			Files.write(sectPath, file.getBytes());
+//		} catch (Exception e) {
+
 	public String s_insert(@RequestParam("file") MultipartFile file, Section sect,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime standard_time,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start_time,
-			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end_time
-	) {
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end_time) {
 		String imageFileName = file.getOriginalFilename();
-		String path = "D:/sectionfile/";
-		sect.setSect_imgpath(path);
+		String path = "C:\\Users\\17\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\sec_img\\";
+		sect.setSect_imgpath(imageFileName);
 
 		Path sectPath = Paths.get(path + imageFileName);
 		try {
@@ -166,6 +227,20 @@ public class MainController {
 
 		return "cafesuccess";
 
+	}
+
+	
+
+	@RequestMapping("/secimg")
+	public String Secimg(Model mod) {
+		Long id = (long) 1;
+		Optional<Company> result = companyrepositiry.findById(id);
+		System.out.println("=============================");
+		Company com = result.get();
+		System.out.println(com);
+
+		mod.addAttribute("com", com);
+		return "secimage";
 	}
 
 }
