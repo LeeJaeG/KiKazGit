@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="EUC-KR">
-<title>ī����ȸ</title>
+<meta charset="utf-8">
+<title>카페조회</title>
 </head>
 <body>
-����Ʈ
+<h1>키즈카페 리스트</h1>
+        <div>
+        	<table>
+        		<thead>
+        			<tr>
+        				<th scope="col">#</th>
+        				<th scope="col">서비스분류</th>
+        				<th scope="col">작성자</th>
+        				<th scope="col">제목</th>
+        				<th scope="col">부제목</th>
+        				<th scope="col">작성일</th>
+        				
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr th:each="board:${boardList}">
+        				<td th:text="${board.id}"></td>
+        				<td th:text="${board.boardType.value}"></td>
+        				<td th:text="${board.username.username}"></td>
+        				<td><a th:href="'/board/view?id='+${board.id}" th:text="${board.title}"></a></td>
+        				<!-- 링크의 주소를 절대경로를 넣어서 보는 페이지로 연결되게한다. -->
+        				<td th:text="${board.subTitle}"></td>
+        				<td th:text="${board.wdate}"></td>
+        				
+        			</tr>
+        		</tbody>
+        	</table>
+        </div>
 </body>
 </html>
