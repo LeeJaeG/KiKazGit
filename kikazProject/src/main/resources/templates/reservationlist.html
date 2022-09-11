@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<thead>
+			<tr>
+				<th scope="col">예약번호</th>
+				<th scope="col">예약자</th>
+				<th scope="col">성인수</th>
+				<th scope="col">아이 수</th>
+				<th scope="col">아이 수</th>
+				<th scope="col">예약 시작 시간</th>
+				<th scope="col">예약 종료 시간</th>
+				<th scope="col">아이 수</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr th:each="board:${list}">
+				<td th:text="${board.id}"></td>
+				<td th:text="${board.boardType.getValue()}"></td>
+				<td><a th:href="'/select/?id='+${board.id}"
+					th:text="${board.title}"></a></td>
+				<td th:text="${board.subTitle}"></td>
+				<td th:text="${board.wdate}"></td>
+				<td th:text="${board.user.username}"></td>
+				<td th:text="${board.view}"></td>
+			</tr>
+			
+		</tbody>
+	</div>
+</body>
+</html>

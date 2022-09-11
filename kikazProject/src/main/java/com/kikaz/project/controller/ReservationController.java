@@ -14,6 +14,7 @@ import com.kikaz.project.repository.ReservationRepository;
 
 @Controller
 public class ReservationController {
+	
 	@Autowired
 	private ReservationRepository reservationrepositiry;
 	
@@ -29,6 +30,11 @@ public class ReservationController {
 		System.out.println(sleepData.toString());
 		reservationrepositiry.save(sleepData);
 		return new ResponseEntity<Reservation>(sleepData, HttpStatus.CREATED);
+		}
 
+	@GetMapping("/r_list")
+	public String r_list() {
+		return "reservationlist";
 	}
+	
 }
