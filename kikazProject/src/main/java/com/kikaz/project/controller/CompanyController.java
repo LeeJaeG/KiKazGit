@@ -3,6 +3,7 @@ package com.kikaz.project.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kikaz.project.model.Company;
+import com.kikaz.project.model.User;
 import com.kikaz.project.repository.CompanyRepository;
+import com.kikaz.project.repository.UserRepository;
 import com.kikaz.project.service.CompanyService;
+
 
 @Controller
 public class CompanyController {
@@ -27,6 +31,8 @@ public class CompanyController {
 	private CompanyService companyService;
 	@Autowired
 	private CompanyRepository companyrepositiry;
+	@Autowired
+	private UserRepository userRepositiry;
 	
 	@GetMapping("/cafeinsert")
 	public String cafejoin() {
@@ -34,7 +40,10 @@ public class CompanyController {
 	}
 	
 	@PostMapping("/c_insert")
-	public @ResponseBody String c_insert(MultipartFile file, Company com) {
+	@ResponseBody
+	public String c_insert(Principal principal,MultipartFile file, Company com) {
+		User user = userRepositiry.findByUsername(principal.getName());
+		com.setUser(user);
 		String imageFileName = file.getOriginalFilename();
 		String path = "C:\\Users\\15\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\image\\";
 		com.setCom_imgpath(imageFileName);
