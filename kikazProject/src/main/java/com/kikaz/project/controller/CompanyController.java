@@ -73,7 +73,7 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String List(Model model,
-		@PageableDefault(size = 5, sort = "companyid", direction = Sort.Direction.DESC) Pageable pageable) {
+		@PageableDefault(size = 5, sort = "companyid", direction = Sort.Direction.ASC) Pageable pageable) {
 		System.out.println("===============>"+pageable);
 		companyService.findBoardList(pageable);
 		model.addAttribute("companyList", companyService.findBoardList(pageable));
@@ -81,5 +81,4 @@ public class CompanyController {
 		return "company/list";
 	}
 }
-
 

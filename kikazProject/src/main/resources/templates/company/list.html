@@ -11,24 +11,31 @@
         		<thead>
         			<tr>
         				<th scope="col">#</th>
-        				<th scope="col">서비스분류</th>
-        				<th scope="col">작성자</th>
-        				<th scope="col">제목</th>
-        				<th scope="col">부제목</th>
-        				<th scope="col">작성일</th>
-        				
+        				<th scope="col">사업자</th>
+        				<th scope="col">사진</th>
+        				<th scope="col">회사번호</th>
+        				<th scope="col">회사이름</th>
+        				<th scope="col">내용</th>
+        				<th scope="col">주소</th>
+        				<th scope="col">테마</th>
+        				<th scope="col">유저</th>
         			</tr>
         		</thead>
         		<tbody>
-        			<tr th:each="board:${boardList}">
-        				<td th:text="${board.id}"></td>
-        				<td th:text="${board.boardType.value}"></td>
-        				<td th:text="${board.username.username}"></td>
-        				<td><a th:href="'/board/view?id='+${board.id}" th:text="${board.title}"></a></td>
-        				<!-- 링크의 주소를 절대경로를 넣어서 보는 페이지로 연결되게한다. -->
-        				<td th:text="${board.subTitle}"></td>
-        				<td th:text="${board.wdate}"></td>
+        			<tr th:each="company:${companyList}">
+        				<td th:text="${company.companyid}"></td>
+        				<td th:text="${company.businessname}"></td>
+        						
+        				<td><img th:src="@{../image/}+${company.com_imgpath}"height="180" width="180"></td>
+        				<td th:text="${company.com_tel}"></td>
+        				<td th:text="${company.companyname}"></td>
+        				<td th:text="${company.content}"></td>
+        				<td th:text="${company.location}"></td>
+        				<td th:text="${company.theme}"></td>
+        				<td th:text="${company.user.username}"></td>
         				
+        				<!-- <td><a th:href="'/board/view?id='+${board.id}" th:text="${board.title}"></a></td> -->
+        				<!-- 링크의 주소를 절대경로를 넣어서 보는 페이지로 연결되게한다. -->   				
         			</tr>
         		</tbody>
         	</table>
