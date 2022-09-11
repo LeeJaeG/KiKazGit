@@ -87,8 +87,6 @@ public class MainController {
 	@PostMapping("/join")
 	public String join(User user) {
 		System.out.println(user.toString());
-		// userRepository.save(user);
-		user.setRole(Role.USER);
 		String encPassword = bCryptPasswordEncoder.encode(user.getPassword());
 		user.setPassword(encPassword);
 
