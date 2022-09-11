@@ -26,11 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/user/**").authenticated() // 로그인만 하면 가능
 		.antMatchers("/admin/**").access("hasRole('ADMIN')") // 어드민만 가능
 				.anyRequest().permitAll() // 세개외에는 다 가능
-<<<<<<< HEAD
-				.and().formLogin().loginPage("/loginForm").loginProcessingUrl("/login").defaultSuccessUrl("/main");//
-=======
-				.and().formLogin().loginPage("/loginForm").loginProcessingUrl("/login").defaultSuccessUrl("/");//
 
->>>>>>> origin/nh_branch
+
+				.and().formLogin().loginPage("/loginForm").loginProcessingUrl("/login").defaultSuccessUrl("/main");//
+
 	}
 }

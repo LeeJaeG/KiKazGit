@@ -13,12 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-<<<<<<< HEAD
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-=======
->>>>>>> origin/nh_branch
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;

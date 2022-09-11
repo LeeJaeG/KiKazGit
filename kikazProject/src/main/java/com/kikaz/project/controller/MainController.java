@@ -64,14 +64,10 @@ public class MainController {
 
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private CompanyRepository companyrepositiry;
-	@Autowired
-	private ReservationRepository reservationrepositiry;
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	@Autowired
-	private SectionRepository sectionRepository;
+
 
 	@GetMapping("/main")
 	public String main() {
@@ -100,147 +96,7 @@ public class MainController {
 		return "redirect:/loginForm";
 	}
 
-	@GetMapping("/reservation")
-	public String resevation() {
-		return "reservation";
-	}
 
-	@PostMapping("/r_insert")
-	@ResponseBody
-	public ResponseEntity<Reservation> postEating(@RequestBody Reservation sleepData) {
-		System.out.println("post request");
-		System.out.println(sleepData.toString());
-		reservationrepositiry.save(sleepData);
-		return new ResponseEntity<Reservation>(sleepData, HttpStatus.CREATED);
 
-	}
-
-	// 키즈카페 등록
-
-	@GetMapping("/cafeinsert")
-	public String cafejoin() {
-		return "cafeinsert";
-	}
-
-//	@PostMapping("/c_insert")
-//	public @ResponseBody String c_insert(MultipartFile file, Company com) {
-//		String imageFileName = file.getOriginalFilename();
-//		String path = "D:/projectFile/" + imageFileName;
-//		com.setCom_imgpath(path);
-//		companyrepositiry.save(com);
-//		Path imaPath = Paths.get(path);
-//		try {
-//			Files.write(imaPath, file.getBytes());
-//		} catch (Exception e) {
-//
-//		}
-//		return "cafesuccess";
-//	}
-//
-
-	@PostMapping("/c_insert")
-	public @ResponseBody String c_insert(MultipartFile file, Company com) {
-		String imageFileName = file.getOriginalFilename();
-		String path = "C:\\Users\\17\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\image\\";
-		com.setCom_imgpath(imageFileName);
-		companyrepositiry.save(com);
-		Path imaPath = Paths.get(path + imageFileName);
-		try {
-			Files.write(imaPath, file.getBytes());
-		} catch (Exception e) {
-
-		}
-		return "cafesuccess";
-	}
-
-	/*
-	 * @RequestMapping("/cafeimg") public String cafe_img(Model
-	 * mod,@RequestParam(value = "id", defaultValue = "0")Long id) {
-	 * Optional<Company> com = companyrepositiry.findById(id);
-	 * mod.addAttribute("com", com); System.out.println("====>"+com); return
-	 * "cafeimage"; }
-	 */
-	@RequestMapping("/cafeimg")
-	public String cafeimg(Model mod) {
-		Long id = (long) 2;
-		Optional<Company> result = companyrepositiry.findById(id);
-		System.out.println("=============================");
-		Company com = result.get();
-		System.out.println(com);
-
-		mod.addAttribute("com", com);
-		return "cafeimage";
-	}
-
-	// 파트 등록
-	@GetMapping("/sectioninsert")
-	public String sectionjoin() {
-		return "sectioninsert";
-	}
-
-//	@PostMapping("/s_insert")
-//	
-//	public String s_insert(@RequestPart("sect") Section sect, @RequestPart("file") MultipartFile file) {
-//		System.out.println(sect);
-//		String imageFileName = file.getOriginalFilename();
-//		String path = "D:/sectionfile/" + imageFileName;
-//	System.out.println(path);
-//		return "cafesuccess";
-//	}
-
-//	@PostMapping("/s_insert")
-//
-//	public String s_insert(@RequestParam("file") MultipartFile file, Section sect,
-//			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime standard_time,
-//			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start_time,
-//			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end_time
-//	) {
-//		String imageFileName = file.getOriginalFilename();
-//		String path = "D:/sectionfile/";
-//		sect.setSect_imgpath(path);
-//
-//		Path sectPath = Paths.get(path + imageFileName);
-//		try {
-//			Files.write(sectPath, file.getBytes());
-//		} catch (Exception e) {
-
-	public String s_insert(@RequestParam("file") MultipartFile file, Section sect,
-			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime standard_time,
-			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start_time,
-			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end_time) {
-		String imageFileName = file.getOriginalFilename();
-		String path = "C:\\Users\\17\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\sec_img\\";
-		sect.setSect_imgpath(imageFileName);
-
-		Path sectPath = Paths.get(path + imageFileName);
-		try {
-			Files.write(sectPath, file.getBytes());
-		} catch (Exception e) {
-
-		}
-
-		sect.setStandardtime(standard_time);
-		sect.setStarttime(start_time);
-		sect.setEndtime(end_time);
-		sectionRepository.save(sect);
-		System.out.println(sect);
-
-		return "cafesuccess";
-
-	}
-
-	
-
-	@RequestMapping("/secimg")
-	public String Secimg(Model mod) {
-		Long id = (long) 1;
-		Optional<Company> result = companyrepositiry.findById(id);
-		System.out.println("=============================");
-		Company com = result.get();
-		System.out.println(com);
-
-		mod.addAttribute("com", com);
-		return "secimage";
-	}
 
 }
