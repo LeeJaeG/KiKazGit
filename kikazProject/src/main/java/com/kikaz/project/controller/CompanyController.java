@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +28,7 @@ import com.kikaz.project.service.CompanyService;
 
 @Controller
 public class CompanyController {
+	
 	@Autowired
 	private CompanyService companyService;
 	@Autowired
@@ -69,13 +71,15 @@ public class CompanyController {
 		return "cafeimage";
 	}
 	
-	@GetMapping("/list")
-	public String getList(Model model,
-			@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
+	public String List(Model model,
+		@PageableDefault(size = 5, sort = "companyid", direction = Sort.Direction.DESC) Pageable pageable) {
+		System.out.println("===============>"+pageable);
 		companyService.findBoardList(pageable);
 		model.addAttribute("companyList", companyService.findBoardList(pageable));
 
 		return "company/list";
 	}
-	
 }
+
+

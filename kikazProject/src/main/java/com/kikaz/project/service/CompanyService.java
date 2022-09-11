@@ -24,7 +24,7 @@ public class CompanyService {
 	}
 	
 	public Company findCompanyByName(Long id) {
-		return companyRepository.findById(id).orElse(null);
+		return companyRepository.findById(id).orElse(new Company());
 	}
 	public Company findBoardById(Long id) {
 		return companyRepository.findById(id).orElse(new Company());

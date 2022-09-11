@@ -23,7 +23,7 @@ spring:
     hibernate:
 
 
-      ddl-auto: update
+      ddl-auto: none
 
 
       naming:
