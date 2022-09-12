@@ -25,7 +25,7 @@ import lombok.Data;
 public class Reservation {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long rsrv_id;
+	private Long rsrvid;
 	private Integer adult_num;
 	private Integer child_num;
 	private Boolean success_status;

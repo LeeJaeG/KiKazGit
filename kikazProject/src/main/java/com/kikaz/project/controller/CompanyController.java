@@ -36,6 +36,7 @@ public class CompanyController {
 	
 	@GetMapping("/cafeinsert")
 	public String cafejoin() {
+		System.out.println( companyrepositiry.findByLocationContaining("대구"));
 		return "cafeinsert";
 	}
 	
@@ -54,6 +55,7 @@ public class CompanyController {
 		} catch (Exception e) {
 
 		}
+		
 		return "cafesuccess";
 	}
 	
@@ -77,5 +79,7 @@ public class CompanyController {
 
 		return "company/list";
 	}
+	
+
 	
 }

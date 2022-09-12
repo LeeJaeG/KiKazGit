@@ -15,9 +15,9 @@ import lombok.Data;
 public class Company {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	private Long company_id;
-	private String company_name;
-	private String business_name;
+	private Long companyid;
+	private String companyname;
+	private String businessname;
 	private String location;
 	private String com_imgpath;
 	private String theme;
