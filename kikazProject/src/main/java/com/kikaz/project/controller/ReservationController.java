@@ -44,7 +44,6 @@ public class ReservationController {
 
 	@PostMapping("/r_insert")
 	@ResponseBody
-<<<<<<< HEAD
 	public ResponseEntity<Reservation> postEating(@RequestBody Reservation reservation, Principal principal) {
 		User user = userRepository.findByUsername(principal.getName());
 		 System.out.println(user);
@@ -62,8 +61,7 @@ public class ReservationController {
 		System.out.println( reservation);
 		m.addAttribute("reservation", reservation);
 		return "/reservationlist";
-		
-=======
+	}
 	public ResponseEntity<Reservation> postEating(@RequestBody Reservation reservation) {
 		System.out.println("post request");
 		System.out.println(reservation.toString());
@@ -74,7 +72,6 @@ public class ReservationController {
 	@GetMapping("/r_list")
 	public String r_list() {
 		return "reservationlist";
->>>>>>> origin/main
 	}
 	
 	
