@@ -1,6 +1,6 @@
 package com.kikaz.project.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +31,8 @@ public class CompanyService {
 	}
 
 	public Page<Company> findBoardList(Pageable pageable){
-		PageRequest.of(pageable.getPageNumber()<=0?0:pageable.getPageNumber()-1, pageable.getPageSize(), pageable.getSort());
+		PageRequest.of(pageable.getPageNumber()<=0?0:pageable.getPageNumber()-1,
+				pageable.getPageSize(), pageable.getSort());
 		return companyRepository.findAll(pageable);
 	
 	}

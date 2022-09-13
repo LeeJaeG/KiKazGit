@@ -42,12 +42,11 @@ public class CompanyController {
 	}
 	
 	@PostMapping("/c_insert")
-	@ResponseBody
 	public String c_insert(Principal principal,MultipartFile file, Company com) {
 		User user = userRepositiry.findByUsername(principal.getName());
 		com.setUser(user);
 		String imageFileName = file.getOriginalFilename();
-		String path = "C:\\Users\\15\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\image\\";
+		String path = "C:\\Users\\17\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\image\\";
 		com.setCom_imgpath(imageFileName);
 		companyrepositiry.save(com);
 		Path imaPath = Paths.get(path + imageFileName);
@@ -56,7 +55,7 @@ public class CompanyController {
 		} catch (Exception e) {
 
 		}
-		return "cafesuccess";
+		return "main";
 	}
 	
 	@RequestMapping("/cafeimg")
@@ -71,7 +70,7 @@ public class CompanyController {
 		return "cafeimage";
 	}
 	
-	@RequestMapping(value = "/list",method = RequestMethod.GET)
+	@RequestMapping(value = "/c_list",method = RequestMethod.GET)
 	public String List(Model model,
 		@PageableDefault(size = 5, sort = "companyid", direction = Sort.Direction.ASC) Pageable pageable) {
 		System.out.println("===============>"+pageable);

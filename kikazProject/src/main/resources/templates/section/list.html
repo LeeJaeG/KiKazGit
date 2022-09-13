@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>섹션조회</title>
+</head>
+<body>
+<h1>섹션 리스트</h1>
+<button type="button" onclick="location.href='/main' ">메인</button>
+<button type="button" onclick="location.href='/sectioninsert' ">섹션등록</button>
+        <div>
+        	<table>
+        		<thead>
+        			<tr>
+        				<th scope="col">#</th>
+        				<th scope="col">섹션이름</th>
+        				<th scope="col">사진</th>
+        				<th scope="col">가격</th>
+        				<th scope="col">기준시간</th>
+        				<th scope="col">시작시간</th>
+        				<th scope="col">종료시간</th>
+        				<th scope="col">어른최대인원</th>
+        				<th scope="col">유아최대인원</th>
+        				
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr th:each="section:${sectionList}">
+        				<td th:text="${section.sectionid}"></td>
+        				<td th:text="${section.sectionname}"></td>
+        				<td><img th:src="@{../sec_img/}+${section.sect_imgpath}"height="180" width="180"></td>
+        				<td th:text="${section.price}"></td>
+        				<td th:text="${section.standardtime}"></td>
+        				<td th:text="${section.starttime}"></td>
+        				<td th:text="${section.endtime}"></td>
+						<td th:text="${section.maxnum_adult}"></td>
+						<td th:text="${section.maxnum_child}"></td>
+        				   				
+        			</tr>
+        		</tbody>
+        	</table>
+        </div>
+
+</body>
+</html>

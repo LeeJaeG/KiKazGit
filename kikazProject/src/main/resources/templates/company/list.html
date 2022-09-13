@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>키즈카페 리스트</h1>
+<button type="button" onclick="location.href='/main' ">메인</button>
         <div>
         	<table>
         		<thead>
@@ -26,7 +27,7 @@
         				<td th:text="${company.companyid}"></td>
         				<td th:text="${company.businessname}"></td>
         						
-        				<td><img th:src="@{../image/}+${company.com_imgpath}"height="180" width="180"></td>
+        				<td><a id="companyname" href="/"><img th:src="@{../image/}+${company.com_imgpath}"height="180" width="180"></a></td>			
         				<td th:text="${company.com_tel}"></td>
         				<td th:text="${company.companyname}"></td>
         				<td th:text="${company.content}"></td>
@@ -40,5 +41,29 @@
         		</tbody>
         	</table>
         </div>
+        <nav style="text-align:center;">
+        	<ul class="pagination" 
+        	th:with="startNumber=${T(java.lang.Math).floor(companyList.number/5)}*5+1,
+        	endNumber=(${companyList.totalPages})>${startNumber}+4?${startNumber}+4:${companyList.totalPages}">
+        		<li th:style="${companyList.first}?'display:none'">
+		   			<a th:href="@{/list(page=${companyList.number})}">&lsaquo;</a>
+		   		</li>
+		   		
+		   		<li th:each="page:${#numbers.sequence(startNumber,endNumber)}"
+		   		th:class="(${page}==${companyList.number}+1)?'active'">
+		   			<a th:href="@{/list(page=${page})}" th:text="${page}"></a>
+		   		</li>
+		   		
+		   		<li th:style="${companyList.last}?'display:none'">
+		   			<a th:href="@{/list(page=${companyList.number}+2)}">&rsaquo;</a>
+		   		</li>
+		   		
+		   		<li><a th:href="@{/list(page=${companyList.totalPages})}">&raquo;</a></li>
+        	</ul>
+        </nav>
+        
+<script >
+
+</script>
 </body>
 </html>
