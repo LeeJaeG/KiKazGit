@@ -70,17 +70,6 @@ public class SectionController {
 
 	}
 
-	@RequestMapping("/secimg")
-	public String Secimg(Model mod) {
-		Long id = (long) 1;
-		Optional<Company> result = companyrepositiry.findById(id);
-		System.out.println("=============================");
-		Company com = result.get();
-		System.out.println(com);
-
-		mod.addAttribute("com", com);
-		return "secimage";
-	}
 	
 	@RequestMapping(value = "/s_list",method = RequestMethod.GET)
 	public String List(Model model,

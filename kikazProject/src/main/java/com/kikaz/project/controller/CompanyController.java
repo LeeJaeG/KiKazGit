@@ -57,18 +57,7 @@ public class CompanyController {
 		}
 		return "main";
 	}
-	
-	@RequestMapping("/cafeimg")
-	public String cafeimg(Model mod) {
-		Long id = (long) 1;
-		Optional<Company> result = companyrepositiry.findById(id);
-		System.out.println("=============================");
-		Company com = result.get();
-		System.out.println(com);
 
-		mod.addAttribute("com", com);
-		return "cafeimage";
-	}
 	
 	@RequestMapping(value = "/c_list",method = RequestMethod.GET)
 	public String List(Model model,
