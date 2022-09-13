@@ -31,10 +31,12 @@ public class SectionController {
 	
 	
 	@GetMapping("/sectioninsert")
-	public String sectionjoin() {
+	public String sectionjoin(@RequestParam("companyid") String companyid) {
+		System.out.println(companyid);
 		return "sectioninsert";
 	}
 
+	@GetMapping("/s_insert")
 	public String s_insert(@RequestParam("file") MultipartFile file, Section sect,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime standard_time,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start_time,

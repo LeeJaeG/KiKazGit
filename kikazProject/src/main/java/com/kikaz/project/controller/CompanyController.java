@@ -53,7 +53,6 @@ public class CompanyController {
 		try {
 			Files.write(imaPath, file.getBytes());
 		} catch (Exception e) {
-
 		}
 		
 		return "cafesuccess";
@@ -71,13 +70,13 @@ public class CompanyController {
 		return "cafeimage";
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/c_list")
 	public String getList(Model model,
-			@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+			@PageableDefault(size = 5, sort = "companyid", direction = Sort.Direction.DESC) Pageable pageable) {
 		companyService.findBoardList(pageable);
 		model.addAttribute("companyList", companyService.findBoardList(pageable));
 
-		return "company/list";
+		return "companylist";
 	}
 	
 

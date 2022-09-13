@@ -62,12 +62,6 @@ public class ReservationController {
 		m.addAttribute("reservation", reservation);
 		return "/reservationlist";
 	}
-	public ResponseEntity<Reservation> postEating(@RequestBody Reservation reservation) {
-		System.out.println("post request");
-		System.out.println(reservation.toString());
-		reservationrepositiry.save(reservation);
-		return new ResponseEntity<Reservation>(reservation, HttpStatus.CREATED);
-	}
 
 	@GetMapping("/r_list")
 	public String r_list() {
