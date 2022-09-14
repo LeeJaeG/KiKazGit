@@ -19,15 +19,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="res : ${sectionList}">
-					<td th:text="${res.companyid}"></td>
-					<td>
-					<a th:text="${res.companyname}" th:href="@{/sectioninsert(companyid=${res.companyid})}"></a>
-					</td>
-					<td th:text="${res.businessname}"></td>
-					<td th:text="${res.location}"></td>
-					<td th:text="${res.content}"></td>
-					<td th:text="${res.com_tel}"></td>
+				<tr th:each="res : ${companyList}">
+					<td th:text="${res.sectionid}"></td>
+					<td><a th:text="${res.sectionname}"
+						th:href="@{/user_s_list}"></a></td>
+					<td th:text="${res.price}"></td>
+					<td th:text="${res.maxnum_adult}"></td>
+					<td th:text="${res.maxnum_child}"></td>
+					
 				</tr>
 
 			</tbody>
