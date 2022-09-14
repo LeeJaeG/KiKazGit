@@ -1,5 +1,7 @@
 package com.kikaz.project.service;
 
+
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.kikaz.project.model.Section;
 import com.kikaz.project.repository.SectionRepository;
 
+
 @Service
 public class SectionService {
+	
+	private final SectionRepository sectionRepository;
 
-private final SectionRepository sectionRepository;
 	
 	public SectionService(SectionRepository sectionRepository) {
 		this.sectionRepository=sectionRepository;
@@ -21,16 +25,20 @@ private final SectionRepository sectionRepository;
 		sectionRepository.save(section);
 	}
 	
+
 	public Section findCompanyByName(Long id) {
 		return sectionRepository.findById(id).orElse(new Section());
+
 	}
 	public Section findBoardById(Long id) {
 		return sectionRepository.findById(id).orElse(new Section());
 	}
 
 	public Page<Section> findBoardList(Pageable pageable){
+
 		PageRequest.of(pageable.getPageNumber()<=0?0:pageable.getPageNumber()-1,
 				pageable.getPageSize(), pageable.getSort());
+
 		return sectionRepository.findAll(pageable);
 	
 	}
@@ -38,5 +46,5 @@ private final SectionRepository sectionRepository;
 	public void deleteById(Long id) {
 		sectionRepository.deleteById(id);
 	}
-	
+
 }

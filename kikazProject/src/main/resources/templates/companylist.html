@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">회사id</th>
+					<th scope="col">회사명</th>
+					<th scope="col">사업자명</th>
+					<th scope="col">위치</th>
+					<th scope="col">내용</th>
+					<th scope="col">사업장 전화번호</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="res : ${companyList}">
+					<td th:text="${res.companyid}"></td>
+					<td>
+					<a th:text="${res.companyname}" th:href="@{/sectioninsert(companyid=${res.companyid})}"></a>
+					</td>
+					<td th:text="${res.businessname}"></td>
+					<td th:text="${res.location}"></td>
+					<td th:text="${res.content}"></td>
+					<td th:text="${res.com_tel}"></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

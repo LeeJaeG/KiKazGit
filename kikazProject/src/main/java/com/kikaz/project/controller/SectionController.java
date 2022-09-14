@@ -36,19 +36,22 @@ public class SectionController {
 	@Autowired
 	private SectionService sectionService;
 	
+	private String companyid;
+
 	
 	@GetMapping("/sectioninsert")
-	public String sectionjoin() {
+	public String sectionjoin(Model model,@RequestParam("companyid") String companyid) {
+		model.addAttribute("companyid",companyid);
 		return "sectioninsert";
 	}
-	
+
 	@PostMapping("/s_insert")
-	public String s_insert(@RequestParam("file") MultipartFile file, Section sect,
+	public String s_insert(@RequestParam("file") MultipartFile file,@RequestParam(value="companyid") String companyid,
+			Section sect,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime standard_time,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start_time,
-			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end_time
-			) {
-		//Company com = companyrepositiry.findByCompanyname();
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end_time) {
+		System.out.println(companyid);
 		String imageFileName = file.getOriginalFilename();
 		String path = "C:\\Users\\17\\git\\KiKazGit\\kikazProject\\src\\main\\resources\\static\\sec_img\\";
 		sect.setSect_imgpath(imageFileName);
@@ -69,15 +72,15 @@ public class SectionController {
 		return "/main";
 
 	}
-
 	
-	@RequestMapping(value = "/s_list",method = RequestMethod.GET)
-	public String List(Model model,
-		@PageableDefault(size = 5, sort = "sectionid", direction = Sort.Direction.ASC) Pageable pageable) {
-		System.out.println("===============>"+pageable);
+	@GetMapping("/s_list")
+	public String getList(Model model,
+			@PageableDefault(size = 5, sort = "sectionid", direction = Sort.Direction.DESC) Pageable pageable) {
 		sectionService.findBoardList(pageable);
-		model.addAttribute("sectionList", sectionService.findBoardList(pageable));
-		return "section/list";
+		model.addAttribute("companyList", sectionService.findBoardList(pageable));
+
+		return "sectionlist";
 	}
+	
 	
 }

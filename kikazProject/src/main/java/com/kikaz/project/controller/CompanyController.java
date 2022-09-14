@@ -38,6 +38,7 @@ public class CompanyController {
 	
 	@GetMapping("/cafeinsert")
 	public String cafejoin() {
+		//System.out.println( companyrepositiry.findByLocationContaining("대구"));
 		return "cafeinsert";
 	}
 	
@@ -53,12 +54,14 @@ public class CompanyController {
 		try {
 			Files.write(imaPath, file.getBytes());
 		} catch (Exception e) {
-
 		}
+
 		return "main";
+
 	}
 
 	
+
 	@RequestMapping(value = "/c_list",method = RequestMethod.GET)
 	public String List(Model model,
 		@PageableDefault(size = 5, sort = "companyid", direction = Sort.Direction.ASC) Pageable pageable) {
@@ -66,7 +69,8 @@ public class CompanyController {
 		companyService.findBoardList(pageable);
 		model.addAttribute("companyList", companyService.findBoardList(pageable));
 
-		return "company/list";
+		return "companylist";
 	}
+
 }
 

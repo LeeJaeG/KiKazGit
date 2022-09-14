@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,9 +41,8 @@
 <body>
 <div>
 
-
-
        <legend>예약</legend>
+       	파트 명 : <input th:text="${sectionname}"th:name="sectionname" th:value="${sectionname}" disabled="disabled"><br>
         예약 시간 : <input type="datetime-local" name="rstart" id="rstart"><br>
         종료 시간 : <input type="datetime-local" name="rend" id="rend"><br>
         예약 인원(어른) : <select name="yy" id="adult"></select> 명<br>
@@ -52,8 +51,6 @@
         
         <button id="insert">등록</button>
         <button id="r_listall">예약자조회</button>
-        
-        
 
 
 </div>
@@ -85,12 +82,14 @@
             }
          });
 
-      });
-      
-      $('#r_listall').click(function() {
-         location.href = "/r_listall/";
 
-      });
-   </script>
+		});
+		
+		$('#r_listall').click(function() {
+			location.href = "/r_listall/";
+
+		});
+	</script>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.kikaz.project.repository;
 
 
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,5 +10,7 @@ import com.kikaz.project.model.Company;
 
 public interface CompanyRepository extends JpaRepository<Company, Long>{
 	
-	public Company findByCompanyname(String companyname);
+
+	public List<Company> findByLocationContaining(String location);
+
 }
