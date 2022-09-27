@@ -42,7 +42,9 @@ public class SectionController {
 	@GetMapping("/sectioninsert")
 	public String sectionjoin(Model model,@RequestParam("companyid") String companyid) {
 		model.addAttribute("companyid",companyid);
+		System.out.println(sectionRepository.findByCompany_companyid(Long.parseLong(companyid)));
 		return "sectioninsert";
+		
 	}
 
 	@PostMapping("/s_insert")
@@ -71,6 +73,16 @@ public class SectionController {
 
 		return "/main";
 
+	}
+	
+	@GetMapping("/user_s_list")
+	public String getSectionList(Model model,
+			@RequestParam("companyid") Long companyid) {
+		System.out.println(sectionRepository.findByCompany_companyid(companyid));
+		
+		model.addAttribute("companyList", sectionRepository.findByCompany_companyid(companyid));
+
+		return "sectionuserlist";
 	}
 	
 	@GetMapping("/s_list")

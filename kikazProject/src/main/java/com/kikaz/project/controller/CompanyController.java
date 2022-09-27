@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kikaz.project.model.Company;
@@ -71,6 +70,17 @@ public class CompanyController {
 
 		return "companylist";
 	}
+
+	
+	@GetMapping("/c_user_list")
+	public String getuserList(Model model,
+			@PageableDefault(size = 5, sort = "companyid", direction = Sort.Direction.DESC) Pageable pageable) {
+		companyService.findBoardList(pageable);
+		model.addAttribute("companyList", companyService.findBoardList(pageable));
+
+		return "companyuserlist";
+	}
+	
 
 }
 

@@ -19,10 +19,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="res : ${sectionList}">
+				<tr th:each="res : ${companyList}">
 					<td th:text="${res.companyid}"></td>
 					<td>
-					<a th:text="${res.companyname}" th:href="@{/sectioninsert(companyid=${res.companyid})}"></a>
+					<a th:text="${res.companyname}" th:href="@{/user_s_list(companyid=${res.companyid})}"></a>
 					</td>
 					<td th:text="${res.businessname}"></td>
 					<td th:text="${res.location}"></td>
